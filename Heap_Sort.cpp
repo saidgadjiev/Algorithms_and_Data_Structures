@@ -1,21 +1,21 @@
 /*Напишите программу, печатающую набор строк в лексикографическом порядке.
  Строки разделяются символом перевода строки '\n'. Если последний символ в потоке ввода '\n', считать, что после него нет пустой строки. Максимальная длина строки 255 символов. Написать свою функцию сравнения строк. Реализована пиромидальная сортировка.*/
+/*T(n) = O(n)*/
 
 #include <iostream>
 #include <string>
 #include <cstdlib>
-using namespace std;
 
-void heap_make(string *a, int n)
+void heapMake(std::string *heap, int n)
 {
     for (int i = n / 2; i >= 1; --i) {
         for (int j = i; j <= n / 2;) {
             int k = j * 2;
-            if (k + 1 <= n and a[k] < a[k+1]) {
+            if (k + 1 <= n and heap[k] < heap[k+1]) {
                 ++k;
             }
-            if (a[j] < a[k]) {
-                swap(a[k], a[j]);
+            if (heap[j] < heap[k]) {
+                swap(heap[k], heap[j]);
                 j = k;
             } else {
                 break;
@@ -23,25 +23,25 @@ void heap_make(string *a, int n)
         }
     }
 }
-void heap_pop(string *a, int n)
+void heapPop(std::string *heap, int n)
 {
-    swap(a[n], a[1]);
+    swap(heap[n], heap[1]);
     for (int i = 1; 2 * i < n;) {
         i *= 2;
-        if (i + 1 < n && a[i] < a[i + 1]) {
+        if (i + 1 < n && heap[i] < heap[i + 1]) {
             i += 1;
         }
-        if (a[i / 2] < a[i]) {
-            swap(a[i / 2], a[i]);
+        if (heap[i / 2] < heap[i]) {
+            swap(heap[i / 2], heap[i]);
         }
     }
 }
 
-void heap_sort_fast(string *data, int n)
+void heapSortFast(std::string *data, int n)
 {
-    heap_make(data - 1, n);
+    heapMake(data - 1, n);
     for (int i = 0; i < n; ++i) {
-        heap_pop(data - 1, n - i);
+        heapPop(data - 1, n - i);
     }
 }
 
@@ -49,18 +49,20 @@ int main ()
 {
     int i = 0;
     int count = 0;
-    cin >> count;
-    string line;
-    string* arr_line = new string[count];
+    std::cin >> count;
+    std::string line;
+    std::string* heap = new std::string[count];
+    
     while( i < count ) {
-        cin >> line;
-        arr_line[i] = line;
+        std::cin >> line;
+        heap[i] = line;
         i++;
     }
-    heap_sort_fast(arr_line, count);
+    heapSortFast(heap, count);
     for (int i = 0; i < count; i++) {
-        cout << arr_line[i] << endl;
+        std::cout << heap[i] << std::endl;
     }
-    delete [] arr_line;
+    
+    delete [] heap;
     return 0;
 }

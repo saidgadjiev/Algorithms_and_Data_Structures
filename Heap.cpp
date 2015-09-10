@@ -5,38 +5,41 @@
 #include <iostream>
 #include <algorithm>
 #include <assert.h>
-using namespace std;
 
 struct CHeap {
     int element;
     int index;
 };
 
-void siftdown( CHeap heap[], int i, int size )
+void siftdown(CHeap heap[], int i, int size)
 {
     int left = 2 * i + 1;
     int right = 2 * i + 2;
     int largest = i;
-    if( left < size && heap[left].element > heap[i].element )
+    
+    if(left < size && heap[left].element > heap[i].element) {
         largest = left;
-    if( right < size && heap[right].element > heap[largest].element )
+    }
+    if(right < size && heap[right].element > heap[largest].element) {
         largest = right;
-    if( largest != i ) {
-        swap( heap[i], heap[largest] );
-        siftdown( heap, largest, size );
+    }
+    if(largest != i) {
+        std::swap(heap[i], heap[largest]);
+        siftdown(heap, largest, size);
     }
 }
 
-int extractmax( CHeap heap[], int& size )
+int extractMax(CHeap heap[], int& size)
 {
     assert(size > 0);
     int result = heap[0].element;
-
+    
     heap[0] = heap[size - 1];
     size--;
     if(size > 0) {
-        siftdown( heap, 0, size );
+        siftdown(heap, 0, size);
     }
+    
     return result;
 }
 
@@ -46,13 +49,13 @@ void siftup( CHeap heap[], int index )
         int parent = (index - 1) / 2;
         if(heap[index].element <= heap[parent].element)
             return;
-        swap(heap[index].element, heap[parent].element);
-        swap(heap[index].index, heap[parent].index);
+        std::swap(heap[index].element, heap[parent].element);
+        std::swap(heap[index].index, heap[parent].index);
         index = parent;
     }
 }
 
-void add( CHeap heap[], int& realsize, int element, int index )
+void add(CHeap heap[], int& realsize, int element, int index)
 {
     realsize++;
     heap[realsize - 1].element = element;
@@ -62,31 +65,31 @@ void add( CHeap heap[], int& realsize, int element, int index )
 
 int main()
 {
-    int begin = 0;
     int realsize = 0;
     int number_read = 0;
     int arr_size = 0;
     int size_wind = 0;
-    cin >> arr_size;
+    std::cin >> arr_size;
     CHeap heap[arr_size];
     int in_arr[arr_size];
-
+    
     for (int i = 0; i < arr_size; i++) {
-        cin >> in_arr[i];
+        std::cin >> in_arr[i];
     }
-    cin >> size_wind;
+    std::cin >> size_wind;
     for (int i = 0; i < size_wind; i++) {
         add(heap, realsize, in_arr[i], i);
     }
     number_read = size_wind;
-    while( number_read <= arr_size ) {
+    while(number_read <= arr_size) {
         if (heap[0].index >= number_read - size_wind && heap[0].index <= number_read) {
-            cout << heap[0].element << " ";
+            std::cout << heap[0].element << " ";
             add(heap, realsize, in_arr[number_read], number_read);
             number_read++;
         } else {
-            extractmax(heap, realsize);
+            extractMax(heap, realsize);
         }
     }
+    
     return 0;
 }

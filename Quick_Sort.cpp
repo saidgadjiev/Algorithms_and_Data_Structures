@@ -1,41 +1,94 @@
+/*Quick sort*/
+/*T(n) = O(nlogn);*/
+
+#include <cstdio>
+#include <cstdlib>
+#include <vector>
+#include <ctime>
+#include <cstdio>
 #include <iostream>
-#define SIZEDIGIT 64
-using namespace std;
 
-int digit(long long element, int w)
-{
-    long long temp = element;
-    for (long long i = 0; i < SIZEDIGIT - w; i++) {
-        temp = temp >> 1;
+#define MINQUICKSORTSIZE 50
+#define READSIZE 10
+#define UINTSIZE 4
+
+void insertionSort(unsigned int *arr, unsigned int start, unsigned int end) {
+    for (unsigned int i = start + 1; i <= end; ++i) {
+        unsigned int tmp = arr[i];
+        unsigned int j;
+        for (j = i; j > start && tmp < arr[j - 1]; --j) {
+            arr[j] = arr[j - 1];
+        }
+        arr[j] = tmp;
     }
-    return temp & 1;
 }
 
-void binaryQuickSort(long long arr[], long long l, long long r, long long w)
-{
-    long long i = l, j = r;
-    if(r <= l || w > SIZEDIGIT) return;
-    while(j != i) {
-        while(digit(arr[i], w) == 0 && (i < j)) i++;
-        while(digit(arr[j], w) == 1 && (j > i)) j--;
-        swap(arr[i], arr[j]);
+unsigned int partition(unsigned int* array, unsigned int start, unsigned int end) {
+    if (start == end)
+        return start;
+    
+    unsigned int part = (start + end) / 2;
+    if (array[end] >= array[start]) {
+        if (array[end] >= array[part]) {
+            if (array[part] >= array[start]) {
+                std::swap(array[end], array[part]);
+            } else {
+                std::swap(array[end], array[start]);
+            }
+        }
+    } else if (array[end] < array[part]) {
+        if (array[part] >= array[start]) {
+            std::swap(array[end], array[start]);
+        } else {
+            std::swap(array[end], array[part]);
+        }
     }
-    if(digit(arr[r], w) == 0) j++;
-    binaryQuickSort(arr, l, j -1, w + 1);
-    binaryQuickSort(arr, j, r, w + 1);
+    
+    unsigned int p = array[end];
+    unsigned int i = start;
+    unsigned int j = end - 1;
+    while (i <= j) {
+        for (; array[i] < p; ++i) {}
+        for (; j >= 0 && array[j] >= p; --j) {}
+        if (i < j) {
+            std::swap(array[i++], array[j--]);
+        }
+    }
+    std::swap(array[i], array[end]);
+    
+    return i;
 }
+
+void quickSort (unsigned int *array, unsigned int start, unsigned int end) {
+    if (end - start + 1 <= MINQUICKSORTSIZE) {
+        insertionSort(array, start, end);
+        return;
+    }
+    unsigned int pivot = partition (array, start, end);
+    quickSort (array, start, pivot - 1);
+    quickSort (array, pivot + 1, end);
+}
+
 int main()
 {
-    long long count = 0;
-    cin >> count;
-    long long arr[count];
-
-    for (long long i = 0; i < count; i++) {
-        cin >> arr[i];
+    unsigned int k = 0, numRead = 1;
+    unsigned int *array = (unsigned int*) malloc(READSIZE * UINTSIZE);
+    
+    while (scanf("%u %u %u %u %u %u %u %u %u %u ", array + k, array + k + 1, array + k + 2, array + k + 3, array + k + 4, array + k + 5, array + k + 6, array + k + 7, array + k + 8, array + k + 9) == READSIZE) {
+        k += READSIZE;
+        ++numRead;
+        array = (unsigned int*) realloc(array, READSIZE * UINTSIZE * numRead);
     }
-    binaryQuickSort(arr, 0, count - 1, 1);
-    for (long long i = 0; i < count; i++) {
-        cout << arr[i] << " ";
+    quickSort(array, 0, k - 1);
+    k = 0;
+    --numRead;
+    while (numRead > 0) {
+        printf("%u ", array[k+9]);
+        k += READSIZE;
+        --numRead;
     }
+    
     return 0;
 }
+
+

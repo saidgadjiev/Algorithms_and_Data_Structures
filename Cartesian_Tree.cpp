@@ -3,179 +3,135 @@
  Каждая пара чисел {Xi, Yi} определяет ключ Xi и приоритет Yi в декартовом дереве.*/
 
 #include <iostream>
-#include <cstdio>
+#include <ctime>
 #include <cstdlib>
-#include <cstring>
-#include <assert.h>
-#define DEFAULT_TABLE_SIZE 8
-#define HashParamA 37
-#define EMPTY 0
-#define BUSY 1
-#define DELETED 2
-using namespace std;
 
-int HashOne( const string& s, int m ) {
-    int result = 0;
-    for ( int i = 0; i < static_cast<int>( s.length() ); ++i ) {
-        result = ( result * HashParamA + s[i] ) % m;
-    }
-    return result;
-}
-
-int HashTwo( const string& s, int m ) {
-    int result = 0;
-    for ( int i = 0; i < static_cast<int>( s.length() ); ++i ) {
-        result = ( result * (HashParamA - 1) + s[i] ) % m;
-    }
-
-    return result + 1;
-}
-
-class Entry {
-public:
-    Entry() : condition(EMPTY) {}
-    void setValue(string value) { this->value = value; }
-    string getValue() { return this->value; }
-    void setCondition(int condition) { this->condition = condition; }
-    int getCondition() { return this->condition; }
-private:
-    string value;
-    int condition;
+struct Treap {
+    int key;
+    int priority;
+    Treap *left;
+    Treap *right;
+    Treap() : left(NULL), right(NULL) {}
+    Treap(int key, int priority) : key(key), priority(priority), left(NULL), right(NULL) {}
 };
 
-class HashMap {
-public:
-    HashMap();
-    ~HashMap();
-    bool has(string value);
-    bool put(string value);
-    bool remove(string value);
-private:
-    float threshold;
-    int maxSize;
-    int tableSize;
-    int size;
-    Entry **table;
-    void resize();
+struct BinaryTree {
+    int key;
+    BinaryTree *left;
+    BinaryTree *right;
+    BinaryTree() : left(NULL), right(NULL) {}
+    BinaryTree(int key) : key(key), left(NULL), right(NULL) {}
 };
 
-HashMap::HashMap()
-{
-    threshold = 0.75f;
-    tableSize = DEFAULT_TABLE_SIZE;
-    maxSize = threshold * tableSize;
-    table = new Entry*[tableSize];
-    size = 0;
-    for (int i = 0; i < tableSize; i++) {
-        table[i] = new Entry();
+void Split(Treap *currentNode, int key, Treap *&left, Treap *&right) {
+    if (currentNode == NULL) {
+        left = NULL;
+        right = NULL;
+    } else if (currentNode->key <= key) {
+        Split(currentNode->right, key, currentNode->right, right);
+        left = currentNode;
+    } else {
+        Split(currentNode->left, key, left, currentNode->left);
+        right = currentNode;
     }
 }
 
-void HashMap::resize() {
-    int oldTableSize = tableSize;
-    tableSize *= 2;
-    maxSize = (int) (tableSize * threshold);
-    Entry **oldTable = table;
-    table = new Entry*[tableSize];
-
-    for (int i = 0; i < tableSize; i++) {
-        table[i] = new Entry();
+void InsertTreap(Treap *&node, int key, int priority)
+{
+    if (node == NULL) {
+        node = new Treap(key, priority);
+        return;
     }
-    size = 0;
-    for (int hash = 0; hash < oldTableSize; hash++) {
-        if (oldTable[hash]->getCondition() == BUSY) {
-            put(oldTable[hash]->getValue());
-            delete oldTable[hash];
-        }
+    if (node->priority < priority) {
+        Treap *newNode, *tree1, *tree2;
+        Split(node, key, tree1, tree2);
+        newNode = new Treap(key, priority);
+        newNode->left = tree1;
+        newNode->right = tree2;
+        node = newNode;
+        return;
     }
-    delete [] oldTable;
+    if (node->key > key) {
+        InsertTreap(node->left, key, priority);
+    } else {
+        InsertTreap(node->right, key, priority);
+    }
 }
 
-bool HashMap::has(string value)
-{
-    int hash1 = HashOne(value, tableSize);
-    int hash2 = HashTwo(value, tableSize);
-
-    for (int i = 0 ; i < tableSize; i++) {
-        int hash = (hash1 + i * hash2) % tableSize;
-        if (table[hash]->getCondition() == EMPTY) {
-            return false;
-        }
-        if (table[hash]->getValue() == value && table[hash]->getCondition() == BUSY) {
-            return true;
-        }
+void InsertBinaryTree(BinaryTree *&node, int key) {
+    if (node == NULL) {
+        node = new BinaryTree(key);
+        return;
     }
-    return false;
+    if (node->key > key) {
+        InsertBinaryTree(node->left, key);
+    } else {
+        InsertBinaryTree(node->right, key);
+    }
 }
 
-bool HashMap::put(string value)
+template <typename T>
+int height(T *node)
 {
-    if (size >= maxSize) {
-        resize();
+    if (node == NULL) {
+        return 0;
+    } else {
+        int lHeight = height(node->left);
+        int rHeight = height(node->right);
+        
+        return (lHeight > rHeight)?(lHeight+1):(rHeight+1);
     }
-    int hash1 = HashOne(value, tableSize);
-    int hash2 = HashTwo(value, tableSize);
-
-    for (int i = 0 ; i < tableSize; i++) {
-        int hash = (hash1 + i * hash2) % tableSize;
-        if (table[hash]->getCondition() != BUSY) {
-            table[hash]->setValue(value);
-            table[hash]->setCondition(BUSY);
-            size++;
-            return true;
-        }
-        if (table[hash]->getValue() == value) {
-            return false;
-        }
-    }
-    return true;
+    return 0;
 }
 
-bool HashMap::remove(string value)
+template <typename T>
+int getMaxWidth(T* root)
 {
-    int hash1 = HashOne(value, tableSize);
-    int hash2 = HashTwo(value, tableSize);
-
-    for (int i = 0 ; i < tableSize; i++) {
-        int hash = (hash1 + i * hash2) % tableSize;
-        if (table[hash]->getCondition() == EMPTY) {
-            return false;
-        }
-        if (table[hash]->getValue() == value && table[hash]->getCondition() == BUSY) {
-            table[hash]->setCondition(DELETED);
-            return true;
+    int maxWidth = 0;
+    int width;
+    int h = height(root);
+    
+    for (int i = 1; i <= h; i++) {
+        width = getWidth(root, i);
+        if(width > maxWidth) {
+            maxWidth = width;
         }
     }
-    return false;
+    
+    return maxWidth;
 }
 
-HashMap::~HashMap()
+template <typename T>
+int getWidth(T* root, int level)
 {
-    for (int hash = 0; hash < tableSize; hash++) {
-        delete table[hash];
+    
+    if(root == NULL) {
+        return 0;
     }
-    delete[] table;
+    
+    if(level == 1) {
+        return 1;
+    } else if (level > 1) {
+        return getWidth(root->left, level-1) +
+        getWidth(root->right, level-1);
+    }
+    return 0;
 }
 
 int main()
 {
-    HashMap hashTable;
-    char command = 0;
-    string data;
-    while( cin >> command >> data ) {
-        switch( command ) {
-            case '+':
-                cout << ( hashTable.put( data ) ? "OK" : "FAIL" ) << std::endl;
-                break;
-            case '-':
-                cout << ( hashTable.remove( data ) ? "OK" : "FAIL" ) << std::endl;
-                break;
-            case '?':
-                cout << ( hashTable.has( data ) ? "OK" : "FAIL" ) << std::endl;
-                break;
-            default:
-                assert( false );
-        }
+    int n;
+    std::cin >> n;
+    int key, priority;
+    Treap *rootTreap = NULL;
+    BinaryTree *rootBinary = NULL;
+    
+    for (int i = 0; i < n; ++i) {
+        std::cin >> key >> priority;
+        InsertTreap(rootTreap, key, priority);
+        InsertBinaryTree(rootBinary, key);
     }
+    std::cout << getMaxWidth<Treap>(rootTreap) - getMaxWidth<BinaryTree>(rootBinary);
+    
     return 0;
 }

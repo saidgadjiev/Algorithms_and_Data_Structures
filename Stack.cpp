@@ -5,91 +5,101 @@
 
 #include <iostream>
 #include <cstring>
-using namespace std;
 
 struct CNode {
-        char data;
-        CNode *next, *prev;
-        CNode(): next(0), prev(0) {}
+    char data;
+    CNode *next, *prev;
+    
+    CNode():next(0), prev(0) {}
 };
 
 typedef CNode *PNode;
 
 struct CStack {
-        PNode Head, Tail;
-        CStack(): Head(0), Tail(0) {}
+    PNode head, tail;
+    
+    CStack():head(0), tail(0) {}
 };
 
-void Push ( CStack &S, char x )
+void Push(CStack &stack, char x)
 {
     PNode NewNode;
+    
     NewNode = new CNode;
     NewNode->data = x;
-    NewNode->next = S.Head;
+    NewNode->next = stack.head;
     NewNode->prev = NULL;
-    if ( S.Head )
-        S.Head->prev = NewNode;
-    S.Head = NewNode;
-    if ( ! S.Tail )
-        S.Tail = S.Head;
+    if (stack.head) {
+        stack.head->prev = NewNode;
+    }
+    stack.head = NewNode;
+    if (!stack.tail) {
+        stack.tail = stack.head;
+    }
 }
 
-char Pop ( CStack &S )
+char Pop(CStack &stack)
 {
-    PNode TopNode = S.Head;
-    char x;
-
-    if ( ! TopNode )
+    PNode TopNode = stack.head;
+    char data;
+    
+    if (!TopNode) {
         return -1;
-    x = TopNode->data;
-    S.Head = TopNode->next;
-    if ( S.Head ) S.Head->prev = NULL;
-    else S.Tail = NULL;
+    }
+    data = TopNode->data;
+    stack.head = TopNode->next;
+    if (stack.head) {
+        stack.head->prev = NULL;
+    } else {
+        stack.tail = NULL;
+    }
+    
     delete TopNode;
-    return x;
+    return data;
 }
 
-char sow(CStack &S)
+char sow(CStack &stack)
 {
-    char x;
-    PNode TopNode = S.Head;
-    if ( ! TopNode )
+    char data;
+    PNode topNode = stack.head;
+    if (!topNode) {
         return -1;
-    x = TopNode->data;
-    return x;
+    }
+    data = topNode->data;
+    
+    return data;
 }
 
-bool IsEmpty(CStack &S)
+bool IsEmpty(CStack &stack)
 {
-    return S.Head == 0;
+    return stack.head == 0;
 }
 
 int main()
 {
-    CStack st;
-    char st_elem = ' ';
-    string comp_word = "";
-    string word_one = " ";
-    string word_two = " ";
-    cin >> word_one >> word_two;
-    int index_one = 0, index_two = 0;
-
-    while(index_one < word_one.length()) {
-        Push(st, word_one[index_one]);
-        index_one++;
-        if (!IsEmpty(st)) {
-            while (sow(st) == word_two[index_two]) {
-                comp_word += Pop(st);
-                index_two++;
+    CStack stack;
+    std::string compWord = "";
+    std::string wordOne = " ";
+    std::string wordTwo = " ";
+    std::cin >> wordOne >> wordTwo;
+    int indexOne = 0, indexTwo = 0;
+    
+    while(indexOne < wordOne.length()) {
+        Push(stack, wordOne[indexOne]);
+        indexOne++;
+        if (!IsEmpty(stack)) {
+            while (sow(stack) == wordTwo[indexTwo]) {
+                compWord += Pop(stack);
+                indexTwo++;
             }
         }
     }
-    if (comp_word.compare(word_two) == 0) {
-        cout << "YES";
+    if (compWord.compare(wordTwo) == 0) {
+        std::cout << "YES";
     } else {
-        cout << "NO";
+        std::cout << "NO";
     }
-
+    
     return 0;
 }
 
