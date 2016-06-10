@@ -6,6 +6,7 @@
 #define DEQUEUE_DEQUEUE_H
 
 #include <iostream>
+#include <cassert>
 
 template <class T>
 class Dequeue {
@@ -37,7 +38,7 @@ Dequeue<T>::Dequeue():
 
 template <class T>
 Dequeue<T>::~Dequeue() {
-    delete buffer;
+    delete[] buffer;
 }
 
 template <class T>
@@ -48,7 +49,7 @@ bool Dequeue<T>::isEmpty() {
 template <class T>
 void Dequeue<T>::grow() {
     int newBufferSize = std::max(bufferSize * 2, 1);
-    int *newBuffer = new int[newBufferSize];
+    T *newBuffer = new T[newBufferSize];
 
     if (!isEmpty()) {
         std::memcpy(newBuffer, buffer + first, (realSize - first) * sizeof(T));
@@ -77,10 +78,8 @@ void Dequeue<T>::pushFront(T elem) {
 
 template <class T>
 T Dequeue<T>::popFront() {
-    if (isEmpty()) {
-        return -1;
-    }
-    int result = buffer[first++];
+    assert(!isEmpty());
+    T result = buffer[first++];
 
     if (first == bufferSize) {
         first = 0;
@@ -104,13 +103,11 @@ void Dequeue<T>::pushBack(T elem) {
 
 template <class T>
 T Dequeue<T>::popBack() {
-    if (isEmpty()) {
-        return -1;
-    }
+    assert(!isEmpty());
     if (last == 0) {
         last = bufferSize;
     }
-    int result = buffer[--last];
+    T result = buffer[--last];
 
     realSize--;
 
