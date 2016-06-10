@@ -3,5 +3,5 @@ project(Heap)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(SOURCE_FILES main.cpp heap.cpp heap.h)
+set(SOURCE_FILES main.cpp heap.h)
 add_executable(Heap ${SOURCE_FILES})
