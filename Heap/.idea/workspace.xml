@@ -12,13 +12,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6e30d0b8-54c7-481a-bb56-123c48fbf60e" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Dequeue.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Heap.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Stack.cpp" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Dequeue/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Dequeue/.idea/workspace.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Tree.cpp" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Deque/.idea/Dequeue.iml" afterPath="$PROJECT_DIR$/../Deque/.idea/Dequeue.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Deque/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Deque/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Deque/CMakeLists.txt" afterPath="$PROJECT_DIR$/../Deque/CMakeLists.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Deque/main.cpp" afterPath="$PROJECT_DIR$/../Deque/main.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../HashMap/.idea/HashMap.iml" afterPath="$PROJECT_DIR$/../HashMap/.idea/HashMap.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../HashMap/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../HashMap/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../HashMap/CMakeLists.txt" afterPath="$PROJECT_DIR$/../HashMap/CMakeLists.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../HashMap/hashmap.h" afterPath="$PROJECT_DIR$/../HashMap/hashmap.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../HashMap/main.cpp" afterPath="$PROJECT_DIR$/../HashMap/main.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMakeLists.txt" afterPath="$PROJECT_DIR$/CMakeLists.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.cpp" afterPath="$PROJECT_DIR$/main.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Stack/.idea/Stack.iml" afterPath="$PROJECT_DIR$/../Stack/.idea/Stack.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Stack/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Stack/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Stack/CMakeLists.txt" afterPath="$PROJECT_DIR$/../Stack/CMakeLists.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Stack/main.cpp" afterPath="$PROJECT_DIR$/../Stack/main.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Tree/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Tree/.idea/workspace.xml" />
     </list>
     <ignored path="Heap.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,7 +49,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="240">
@@ -51,18 +61,18 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="heap.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/heap.cpp">
+      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="2" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="2" />
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="heap.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/heap.h">
+      <file leaf-file-name="Heap.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Heap.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="135">
               <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
@@ -358,7 +368,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290653" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3277849" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32694763" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39948782" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -390,15 +400,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/heap.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="2" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/heap.h">
+    <entry file="file://$PROJECT_DIR$/Heap.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
@@ -416,23 +418,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+    <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/heap.cpp">
+    <entry file="file://$PROJECT_DIR$/heap.cpp" />
+    <entry file="file://$PROJECT_DIR$/Heap.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="2" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="2" />
-          <folding />
+        <state relative-caret-position="135">
+          <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+          <folding>
+            <element signature="e#110#119#0" expanded="true" />
+            <element signature="e#371#380#0" expanded="true" />
+            <element signature="e#468#477#0" expanded="true" />
+            <element signature="e#530#539#0" expanded="true" />
+            <element signature="e#604#613#0" expanded="true" />
+            <element signature="e#787#796#0" expanded="true" />
+            <element signature="e#1199#1208#0" expanded="true" />
+            <element signature="e#1450#1459#0" expanded="true" />
+            <element signature="e#1761#1770#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/heap.h">
+    <entry file="file://$PROJECT_DIR$/heap.cpp" />
+    <entry file="file://$PROJECT_DIR$/Heap.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
@@ -457,6 +473,14 @@
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

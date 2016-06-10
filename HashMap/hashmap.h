@@ -5,7 +5,7 @@
 #ifndef HASHMAP_HASHMAP_H
 #define HASHMAP_HASHMAP_H
 
-#include "hashentry.h"
+#include "HashEntry.h"
 #include <iostream>
 
 template <class K, class V>

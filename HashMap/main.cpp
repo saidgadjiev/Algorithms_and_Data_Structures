@@ -1,5 +1,5 @@
 #include <iostream>
-#include "hashmap.h"
+#include "HashMap.h"
 #include "../wrappers/Integer.h"
 
 int main() {

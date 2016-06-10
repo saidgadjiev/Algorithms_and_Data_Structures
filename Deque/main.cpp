@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstring>
-#include "deque.h"
+#include "Deque.h"
 
 using namespace std;
 
