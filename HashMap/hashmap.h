@@ -16,7 +16,7 @@ public:
     void clear();
     bool containsKey(K key);
     bool containsValue(V value);
-    V get(K key);
+    HashEntry<K, V> *get(K key);
     bool isEmpty();
     void put(K key, V value);
     bool remove(K key);
@@ -66,7 +66,7 @@ void HashMap<K, V>::clear() {
 }
 
 template <class K, class V>
-V HashMap<K, V>::get(K key) {
+HashEntry<K, V> *HashMap<K, V>::get(K key) {
     int hash1 = key.hashOne(tableSize_);
     int hash2 = key.hashTwo(tableSize_);
 
@@ -77,7 +77,7 @@ V HashMap<K, V>::get(K key) {
             return nullptr;
         }
         if (table_[hash]->getKey() == key) {
-            return table_[hash]->getValue();
+            return table_[hash];
         }
     }
 
