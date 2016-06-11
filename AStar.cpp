@@ -1,11 +1,3 @@
-//
-//  main.cpp
-//  AlgorithmLee
-//
-//  Created by Саид on 05.09.15.
-//  Copyright (c) 2015 Саид. All rights reserved.
-//
-
 #include <iostream>
 #include <cmath>
 #include <queue>
@@ -44,28 +36,23 @@ Node::Node(int x, int y, int G, int F):
     _F(F)
 {}
 
-void Node::updateF(int x, int y)
-{
+void Node::updateF(int x, int y) {
     _F = estimate(x, y) * WEIGHT_CELL + _G;
 }
 
-int Node::estimate(int x, int y)
-{
+int Node::estimate(int x, int y) {
     return sqrt((x - _x) * (x - _x)) + sqrt((y- _y) * (y - _y));
 }
 
-void Node::nextLevel()
-{
+void Node::nextLevel() {
     _G += WEIGHT_CELL;
 }
 
-bool operator < (const Node &_x, const Node &_y)
-{
+bool operator < (const Node &_x, const Node &_y) {
     return _x._F < _y._F;
 }
 
-bool findPath(int i1, int j1, int i2, int j2)
-{
+bool findPath(int i1, int j1, int i2, int j2) {
     std::priority_queue<Node> listNode;
     int di[4] = {1, 0, -1, 0};
     int dj[4] = {0, 1, 0, -1};
@@ -95,6 +82,7 @@ bool findPath(int i1, int j1, int i2, int j2)
         if (x == i2 && y == j2) {
             while (!(x == i1 && y == j1)) {
                 int j = dirMap[x][y];
+                
                 px[length] = x;
                 py[length] = y;
                 length++;
@@ -107,6 +95,7 @@ bool findPath(int i1, int j1, int i2, int j2)
         
         for (int k = 0; k < countDir; k++) {
             int ix = x + di[k], jy = y + dj[k];
+            
             if (ix < N && ix >= 0 && jy < M && jy >= 0 && map[ix][jy] == WAY && closeList[ix][jy] != 1) {
                 Node m0(ix, jy, 0, 0);
                 m0.nextLevel();
@@ -123,14 +112,14 @@ bool findPath(int i1, int j1, int i2, int j2)
             }
         }
     }
-    if (x != i2 && y != j2)
+    if (x != i2 && y != j2) {
         return false;
+    }
     
     return true;
 }
 
-void initMap(int **map)
-{
+void initMap(int **map) {
     for (int i = 1; i < N; i++) {
         for (int j = 1; j < M; j++) {
             if (rand() % 4 == 0) {
@@ -140,8 +129,7 @@ void initMap(int **map)
             }
         }
     }
-    for (int i = 0; i < N; ++i)
-    {
+    for (int i = 0; i < N; ++i) {
         map[i][0] = WALL;
         map[0][i] = WALL;
         map[i][N - 1] = WALL;
@@ -149,8 +137,7 @@ void initMap(int **map)
     }
 }
 
-void printMap(int **map)
-{
+void printMap(int **map) {
     std::cout << "MAP" << std::endl;
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < M; j++) {
@@ -160,8 +147,7 @@ void printMap(int **map)
     }
 }
 
-void printWay()
-{
+void printWay() {
     std::cout << "WAY" << std::endl;
     for (int i = length; i > 0; i--) {
         std::cout << px[i] << " " << py[i] << std::endl;
@@ -170,6 +156,7 @@ void printWay()
 
 int main(int argc, const char * argv[]) {
     map = new int*[N];
+    
     for (int i = 0; i < M; i++) {
         map[i] = new int[M];
     }
@@ -179,7 +166,9 @@ int main(int argc, const char * argv[]) {
     findPath(1, 5, 4, 5);
     printWay();
     for (int i = 0; i < N; i++) {
-        delete [] map[i];
+        delete map[i];
     }
+    delete[] map;
+    
     return 0;
 }

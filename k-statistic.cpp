@@ -1,6 +1,3 @@
-/* Даны неотрицательные целые числа n,k и массив целых чисел из [0..10^9] размера n. Требуется найти k-ю порядковую статистику. т.е. напечатать число, которое бы стояло на позиции с индексом k (0..n-1) в отсортированном массиве. Напишите нерекурсивный алгоритм.
- Требования к дополнительной памяти: O(n). Требуемое среднее время работы: O(n).*/
-
 #include <iostream>
 #include <vector>
 #include <cstdlib>
@@ -17,15 +14,16 @@ int partition(std::vector<T> &mas, int l, int r) {
         if (mas[j] >= x)
             std::swap(mas[--i], mas[j]);
     }
+    
     return i;
 }
 template<typename T>
 T kStatistik(std::vector<T> mas, int n) {
     int l = 0, r = mas.size() - 1;
     
-    
     while(true) {
         int pos = partition(mas,l,r);
+        
         if (pos < n) {
             l = pos + 1;
         } else if (pos > n) {
@@ -41,8 +39,10 @@ int main()
     std::vector<int> array;
     int element = 0;
     int count = 0;
+    
     std::cin >> count;
     int k = 0;
+    
     std::cin >> k;
     
     for (int i = 0; i < count; i++) {

@@ -3,10 +3,11 @@
 #include <iostream>
 #include <vector>
 #include <cstdlib>
+
 using namespace std;
 
-void insertionSort(vector<int>& arr)
-{
+template <class T>
+void insertionSort(vector<T>& arr) {
     int n = arr.size();
     int tmp = 0;
     int j = 0;
@@ -20,14 +21,14 @@ void insertionSort(vector<int>& arr)
     }
 }
 
-void merge(vector<int>& arr1, vector<int>& arr2, int k)
-{
+template <class T>
+void merge(vector<T>& arr1, vector<T>& arr2, int k) {
     int i = 0;
     int pos1 = 0;
     int pos2 = 0;
     int len_arr1 = arr1.size();
     int len_arr2 = arr2.size();
-    vector<int> temp;
+    vector<T> temp;
 
     for (i = 0; i < k && pos2 < len_arr2; i++) {
         if(arr1[pos1] < arr2[pos2]) {
@@ -42,14 +43,13 @@ void merge(vector<int>& arr1, vector<int>& arr2, int k)
     }
     swap(arr1, temp);
 }
-int main()
-{
+int main() {
     int size = 0;
     int k = 0;
-    cin >> size >> k;
     int element;
     vector<int> buff;
 
+    cin >> size >> k;
     for (int i = 0; i < k; i++) {
         cin >> element;
         buff.push_back(element);
@@ -70,5 +70,6 @@ int main()
         cout << buff[i] << " ";
     }
     cout << endl;
+    
     return 0;
 }
